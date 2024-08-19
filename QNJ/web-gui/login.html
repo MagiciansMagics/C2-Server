@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../QNJ-Cloud/styling/main.css">
+    <link rel="stylesheet" type="text/css" href="../QNJ-Cloud/styling/login.css">
+    <title>QNJ-Cloud login</title>
+</head>
+<body>
+    <div class="QNJ-TOP-BAR">
+        <div class="QNJ-CLOUD-LOGO-DIV">
+            <a href="/">
+                <img src="/QNJ-Cloud/assets/png/home-white.png" id="QNJ-Cloud-LOGO">
+            </a>
+        </div>
+    </div>
+
+    <div class="QNJ-LOGIN-STUFF">
+        <div class="QNJ-LOGIN-CONTAINER">
+            <form method="post" action="/login_user">
+                <span id="QNJ-EMAIL-TEXT">Username</span>
+                <input placeholder="Enter username..." id="QNJ-LOGIN-INPUT-USERNAME" name="QNJ-username-login" type="text" required>
+                <span>Password</span>
+                <input placeholder="Enter password..." id="QNJ-LOGIN-INPUT-PASSWORD" name="QNJ-password-login" type="password" required>
+                <input name="QNJ-REST-DATA-SKIP" style="display: none;">
+                <button type="submit" id="QNJ-LOGIN-BUTTON">Log in</button>
+            </form>
+        </div>
+    </div>
+    <script src="/QNJ-Cloud/js/web-tracker.js"></script>
+</body>
+</html>

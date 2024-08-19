@@ -1,0 +1,32 @@
+.QNJ-ERR-TEXT-DIV
+{
+    position: absolute;
+    top: 16%;
+    left: 20%;
+}
+
+.QNJ-ERR-TEXT-DIV #ERR-BIG-TEXT
+{
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 54px;
+}
+
+.QNJ-ERR-TEXT-DIV #ERR-TEXT-SHORT
+{
+    line-height: 24px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.QNJ-ERR-TEXT-DIV #ERR-CODE-TEXT
+{
+    line-height: 24px;
+    font-style: italic;
+}
+
+#QNJ-FAILED-LOGIN-GOBACK
+{
+    color: blue;
+    text-decoration: underline;
+}

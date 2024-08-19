@@ -1,0 +1,11 @@
+0x_1000 = proxy error (client checking to if the server is up, TCP)
+0x_2000 = proxy error (client checking to if the server is up, HTTP)
+0x_3000 = proxy error (setting up client to check the servers)
+0x_4000 = starting up tcp server addr error
+0x_5000 = starting up tcp server port error
+0x_6000 = starting up http server addr error
+0x_7000 = starting up http server port error
+0x_8000 = internal proxy error (server errror)
+0x_9000 = internal http error (server error)
+0x_10000 = internal tcp error (server error)
+0x_11000 = empty error variable

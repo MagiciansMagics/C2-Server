@@ -1,0 +1,87 @@
+.QNJ-CLIENT-ARE-DISPLAY
+{
+    position: absolute;
+    top: 17.5%;
+    left: 2.8%;
+    height: 800px;
+    width: 1800px;
+    display: flex;
+    background-color: #111111;
+    border-radius: 10px;
+}
+
+.QNJ-CLIENT-ARE-DISPLAY-CONTAINER
+{
+    position: absolute;
+    height: 720px;
+    width: 1790px;
+    top: 72px;
+    left: 5px;
+    border: solid 2px rgb(132, 0, 255);
+}
+
+#QNJ-CONNECTIONS-DATA-SP
+{
+    display: flex;
+    width: 1450px;
+    word-spacing: 120px;
+    height: 25px;
+    font-size: 18px;
+    margin-left: 10%;
+    margin-top: 15px;
+}
+
+.QNJ-TOP-BAR-CLIENT-INFO
+{
+    position: absolute;
+    height: 65px;
+    width: 1790px;
+    top: 5px;
+    left: 5px;
+    border: solid 2px rgb(132, 0, 255);
+    display: flex;
+}
+
+.QNJ-TOP-BAR-CLIENT-INFO span
+{
+    position: absolute;
+    width: 200px;
+    display: flex;
+    font-size: 18px;
+    margin-top: 22.5px;
+}
+
+#QNJ-UNIQUE-ID-START
+{
+    margin-left: 175px;
+}
+
+#QNJ-UNIQUE-STAT-START
+{
+    margin-left: 312.5px;
+}
+
+#QNJ-UNIQUE-RMA-MID
+{
+    margin-left: 485px;
+}
+
+#QNJ-UNIQUE-IP-MID
+{
+    margin-left: 745px;
+}
+
+#QNJ-UNIQUE-OS-END
+{
+    margin-left: 972.5px;
+}
+
+#QNJ-UNIQUE-OSR-END
+{
+    margin-left: 1150px;
+}
+
+#QNJ-UNIQUE-ARC-END
+{
+    margin-left: 1390px;
+}

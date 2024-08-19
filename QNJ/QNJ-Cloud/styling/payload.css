@@ -1,0 +1,180 @@
+.QNJ-TERMINAL-INPUT-DATA
+{
+    position: absolute;
+    width: 795px;
+    height: 40px;
+    border: solid 2px rgb(132, 0, 255);
+    border-radius: 8px;
+    margin-top: 520px;
+    margin-left: 560px; /* 700 PX IS MIDDLE */
+}
+
+.QNJ-PAYLOAD-TERMINAL-CONTAINER
+{
+    position: relative;
+    width: 785px;
+    height: 30px;
+    margin: 5px;
+}
+
+#QNJ-TERMINAL-INPUT-ID
+{   
+    position: absolute;
+    background-color: rgb(0, 0, 0, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 765px;
+    height: 30px;
+    text-overflow: clip;
+    font-size: 17px;
+    line-height: 5px;
+    font-family: Inconsolata, monospace;
+}
+
+.QNJ-GENERATE-EXPLOIT-VOOR-ALLE
+{
+    position: absolute;
+    top: 160px;
+    left: 560px;
+    height: 400px;
+    width: 390px;
+    border-radius: 10px;
+    border: solid 2px rgb(132, 0, 255);
+}
+
+.QNJ-GENERATE-EXPLOIT-CONTAINER
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.QNJ-GENERATE-EXPLOIT-CONTAINER h3
+{
+    color: rgb(132, 0, 255);
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.QNJ-GENERATE-EXPLOIT-CONTAINER select
+{
+    width: 90%;
+    margin-left: 5%;
+    background-color: rgb(30, 30, 30);
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.QNJ-GENERATE-EXPLOIT-CONTAINER span
+{
+    position: absolute;
+    margin-left: 22px;
+    margin-top: 10px;
+    color: rgb(132, 0, 255);
+    font-weight: 600;
+}
+
+.QNJ-GENERATE-EXPLOIT-CONTAINER button
+{
+    position: absolute;
+    margin-left: 22px;
+    margin-top: 15px;
+    border: solid 2px rgb(132, 0, 255);
+    padding: 10px;
+    font-weight: 800;
+    border-radius: 4px;
+    background-color: rgb(0, 0, 0, 0);
+    transition: all ease 0.5s;
+    cursor: pointer;
+}
+
+#QNJ-GENERATE-EXPLOIT-TYPE-SPECIFIC:hover
+{
+    background-color: rgb(132, 0, 255);
+}
+
+.QNJ-GENERATE-NEW-PAYLOAD-CMD
+{
+    position: absolute;
+    top: 160px;
+    left: 965px;
+    height: 400px;
+    width: 390px;
+    border-radius: 10px;
+    border: solid 2px rgb(132, 0, 255);
+}
+
+.QNJ-GENERATE-PAYLOAD-CONTAINER
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.QNJ-GENERATE-PAYLOAD-CONTAINER span
+{
+    position: absolute;
+    margin-left: 22px;
+    margin-top: 10px;
+    color: rgb(132, 0, 255);
+    font-weight: 600;
+    width: 200px;
+}
+
+.QNJ-GENERATE-PAYLOAD-CONTAINER input
+{
+    width: 85%;
+    margin-left: 5%;
+    background-color: rgb(30, 30, 30);
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.QNJ-GENERATE-PAYLOAD-CONTAINER button
+{
+    position: absolute;
+    margin-left: 22px;
+    left: 0px;
+    margin-top: 248px;
+    border: solid 2px rgb(132, 0, 255);
+    padding: 10px;
+    font-weight: 800;
+    border-radius: 4px;
+    background-color: rgb(0, 0, 0, 0);
+    transition: all ease 0.5s;
+    cursor: pointer;
+}
+
+#QNJ-GENERATE-NEW-CMD-BUTTON:hover
+{
+    background-color: rgb(132, 0, 255);
+}
+
+.QNJ-GENERATE-PAYLOAD-CONTAINER h3
+{
+    color: rgb(132, 0, 255);
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+#QNJ-PAYLOAD-PATH-GENERATE-SPAN
+{
+    top: 105px;
+    left: 0px;
+}
+
+#QNJ-PAYLOAD-CLIENT-ID
+{
+    position: absolute;
+    left: 100%;
+    color: #fff;
+    background-color: rgb(0, 0, 0, 0);
+    border: solid 2px rgb(132, 0, 255);
+}

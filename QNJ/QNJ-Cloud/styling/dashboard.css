@@ -1,0 +1,259 @@
+.QNJ-TOP-BAR
+{   
+    display: flex;
+    width: 100%;
+    height: 75px;                   /* 32.5 HALF */
+    border-bottom: solid 2px rgb(132, 0, 255);
+}
+
+.QNJ-CLOUD-ICON-A
+{
+    position: relative;
+    height: 100%;
+    width: 310px;
+}
+
+.QNJ-CLOUD-ICON-A a
+{
+    display: flex;
+    margin-top: 18.25px;
+    margin-left: 5px;
+    margin-right: 35px;
+}
+
+#QNJ-CLOUD-ICON-A-LINK
+{
+    width: 280px;
+    height: 40px;
+}
+
+.QNJ-TOP-BAR-A-BUTTONS-LOC
+{
+    position: relative;
+    width: 1470px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.QNJ-A-LINK-BUTTONS-TOP
+{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin-top: -3px;
+    margin-right: 50px;
+}
+
+.QNJ-A-LINK-BUTTONS-TOP img
+{
+    width: 35px;
+    height: 35px;
+}
+
+.QNJ-A-LINK-BUTTONS-TOP h3
+{
+    color: rgb(160, 160, 160);
+    margin-left: 8px;
+}
+
+#QNJ-CURRENT-PAGE-H3
+{
+    color: rgb(225, 225, 225);
+}
+
+.QNJ-USER-DATA-AREA
+{
+    position: relative;
+    max-height: 100%;
+    max-width: 130px;
+}
+
+.QNJ-USER-DATA-AREA .QNJ-USER-DATA-CONTAINER
+{
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.QNJ-USER-DATA-CONTAINER img
+{
+    width: 45px;
+    height: 45px;
+}
+
+.QNJ-USER-DATA-BAR-INFO
+{
+    position: absolute;
+    height: 300px;
+    width: 180px;
+    top: 76px;
+    left: 1731.5px;
+    border: solid 2px rgb(132, 0, 255);
+    border-top: solid 0px;
+    display: none;
+    z-index: 100;
+}
+
+#QNJ-PROFILE-BUTTONS
+{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    border-bottom: solid 2px rgb(132, 0, 255);
+}
+
+#QNJ-PROFILE-BUTTONS button
+{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    background-color: rgb(0, 0, 0, 0);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#QNJ-PROFILE-BUTTONS h3
+{
+    color: rgb(132, 0, 220);
+    font-size: 16px;
+    text-align: start;
+    margin-left: 15px;
+    font-weight: 800;
+}
+
+#QNJ-DOOMSDAY-SWITCH-CLASS h3
+{
+    color: rgb(255, 0, 0);
+}
+
+.QNJ-DOOMSDAY-SWITCH-DIV
+{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 600px;
+    height: 400px;
+    transform: translate(-50%, -40%);
+    z-index: 2000;
+    display: none;
+}
+
+.QNJ-DOOMSDAY-SWITCH-CONTAINER
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#QNJ-DOOMSDAY-SWITCH-SPAN-INFO-T
+{
+    position: absolute;
+    line-height: 24px;
+    left: 52.5%;
+    top: 6%;
+    transform: translate(-52.5%, -6%);
+    color: #000;
+    font-weight: 600;
+    width: 305px;
+    font-size: 16px;
+}
+
+.QNJ-DOOMSDAY-SWITCH-CONTAINER button 
+{
+    background-color: rgb(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.QNJ-DOOMSDAY-SWITCH-CONTAINER button h3
+{
+    color: rgb(0, 0, 0);
+}
+
+#QNJ-DOOMSDAY-SWITCH-CONTINUE-B
+{
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-35%, -50%);
+    background-color: green;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#QNJ-DOOMSDAY-SWITCH-CLOSE-B
+{
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-65%, -50%);
+    background-color: red;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.DOOMSDAY-SWITCH-overlay
+{
+    background-color: rgba(80, 80, 80, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    cursor: default;    
+    z-index: 1000;
+    display: none;
+}
+
+.QNJ-SETTINGS-PROFILE
+{
+    margin-top: 92px;
+    border-top: solid 2px rgb(132, 0, 255);
+}
+
+#QNJ-USERNAME-TEXT-SP
+{
+    display: flex;
+    font-size: 12px;
+    color: rgb(140, 140, 140);
+    width: 120px;
+    margin-left: 15px;
+}
+
+.QNJ-MAIN-DATA-AREA
+{
+    width: 100%;
+    height: 100vh;
+}
+
+.QNJ-CENTER-DATA
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 11%;
+    left: 50%;
+    width: 800px;
+    transform: translate(-50%, -11%);
+    border-bottom: solid 2px rgb(132, 0, 255);
+    border-radius: 1px;
+}
+
+.QNJ-H3-INFO-LOCATION
+{
+    margin-bottom: 10px;
+}
+
+.QNJ-H3-INFO-LOCATION h3
+{
+    font-size: 28px;
+    font-family:'Courier New', Courier, monospace;
+    color: rgb(255, 255, 255);
+}

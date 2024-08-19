@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/main.css">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/signup.css">
+    <title>QNJ-Cloud signup</title>
+</head>
+<body>
+    <div class="QNJ-TOP-BAR">
+        <div class="QNJ-CLOUD-LOGO-DIV">
+            <a href="./">
+                <img src="/QNJ-Cloud/assets/png/home-white.png" id="QNJ-Cloud-LOGO">
+            </a>
+        </div>
+    </div>
+
+    <div class="QNJ-LOGIN-STUFF">
+        <div class="QNJ-LOGIN-CONTAINER">
+            <form method="post" action="/signup_user">
+                <span id="QNJ-EMAIL-TEXT">Username</span>
+                <input id="QNJ-LOGIN-INPUT-USERNAME" name="QNJ-EMAIL-SINGUP" type="text" required>
+                <span>Password</span>
+                <input id="QNJ-LOGIN-INPUT-PASSWORD" name="QNJ-PASSWORD-SINGUP" type="password" required>
+                <span id="QNJ-CORFIRM-PASSWD">Confirm password</span>
+                <input id="QNJ-LOGIN-CONFIRM-INPUT-PASSWORD" type="password" required>
+                <input placeholder="eeee" name="QNJ-REST-DATA-SKIP" style="display: none;">
+                <button type="submit" id="QNJ-LOGIN-BUTTON">Sign up</button>
+            </form>
+        </div>
+    </div>
+    <script src="/QNJ-Cloud/js/web-tracker.js"></script>
+</body>
+</html>

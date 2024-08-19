@@ -1,0 +1,425 @@
+.QNJ-Data-0x00-login-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+    left: 34.5%;
+    width: 600px;
+    height: 300px;
+    border-radius: 8px;
+    border: solid 2px rgb(103, 63, 255);
+}
+
+#data-0x00-data-overlay
+{
+    position: absolute;
+    width: 100%;
+    height: 110%;
+    background-color: rgb(255, 255, 255, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+#data-0x00-data-overlay2
+{
+    position: absolute;
+    width: 100%;
+    height: 110%;
+    background-color: rgb(255, 255, 255, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+#QNJ-data-0x00-username-input,
+#QNJ-data-0x00-password-input,
+#QNJ-data-0x00-send-login-button
+{
+    position: absolute;
+    left: 10%;
+    padding: 10px;
+    background-color: rgb(0, 0, 0, 0);
+    border: solid 2px rgb(103, 63, 255);
+    border-radius: 2px;
+    width: 450px;
+}
+
+#QNJ-data-0x00-username-input
+{
+    top: 20%;
+}
+
+#QNJ-data-0x00-password-input
+{
+    top: 40%;
+}
+
+#QNJ-data-0x00-send-login-button
+{
+    top: 72.5%;
+    left: 11.5%;
+    cursor: pointer;
+    transition: ease 0.52s;
+}
+
+#QNJ-data-0x00-send-login-button:hover
+{
+    background-color: rgb(103, 63, 255);
+}
+
+.QNJ-Data-0x00-add-new
+{
+    position: absolute;
+    top: 23%;
+    left: 32.5%;
+    background-color: rgba(80, 80, 80, 0.6);
+    opacity: 0.5;
+    width: 550px;
+    height: 650px;
+}
+
+#QNJ-ADD-NEW-DATA-0x00
+{
+    position: absolute;
+    left: 45.9%;
+    top: 16%;
+    background-color: rgb(103, 63, 255);
+    color: #fff;
+    width: 155px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+#QNJ-logout-data-0x00
+{
+    position: absolute;
+    left: 29.15%;
+    top: 16.5%;
+    border: solid 2px rgb(103, 63, 255);
+    background-color: rgb(0, 0, 0, 0);
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: 800;
+    transition: ease 0.52s;
+    cursor: pointer;
+}
+
+#QNJ-logout-data-0x00:hover
+{
+    background-color: rgb(103, 63, 255);
+}
+
+#QNJ-data-0x00-add
+{
+    position: absolute;
+    left: 67.75%;
+    top: 16.5%;
+    border: solid 2px rgb(103, 63, 255);
+    background-color: rgb(0, 0, 0, 0);
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: 800;
+    transition: ease 0.52s;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+#QNJ-data-0x00-add:hover
+{
+    background-color: rgb(103, 63, 255);
+}
+
+.QNJ-data-0x00-add-data
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 500px;
+    width: 475px;
+    background-color: #000;
+    border-radius: 8px;
+    display: flex;
+    overflow-y: auto;
+    z-index: 2000;
+    display: none;
+}
+
+#QNJ-data-0x00-add-data-container
+{
+    position: relative;
+    height: 200%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#QNJ-data-0x00-title-add
+{
+    color: rgb(132, 0, 255);
+    font-weight: 600;
+    font-size: 21px;
+    position: absolute;
+    left: 50%;
+    top: 0.8%;
+    transform: translate(-50%, -0%);
+}
+
+.QNJ-data-0x00-span-little-info
+{
+    color: rgb(132, 0, 255);
+    font-weight: 600;
+    position: absolute;
+    font-size: 17px;
+    margin-left: -200px;
+}
+
+.QNJ-data-0x00-data-input
+{
+    position: absolute;
+    margin-left: -201px;
+    background-color: rgb(30, 30, 30);
+    padding: 10px;
+    border-radius: 2px;
+    color: #fff;
+    width: 80%;
+}
+
+#QNJ-data-0x00-firstname-info
+{
+    margin-top: 50px;
+}
+
+#QNJ-data-0x00-first-name-id
+{
+    margin-top: 80px;
+}
+
+#QNJ-data-0x00-lastname-info
+{
+    margin-top: 125px;
+}
+
+#QNJ-data-0x00-last-name-id
+{
+    margin-top: 155px;
+}
+
+#QNJ-data-0x00-age-info
+{
+    margin-top: 200px;
+}
+
+#QNJ-data-0x00-age-id
+{
+    margin-top: 230px;
+}
+
+#QNJ-data-0x00-gender-info
+{
+    margin-top: 275px;
+}
+
+#QNJ-data-0x00-gender-id
+{
+    margin-top: 305px;
+}
+
+#QNJ-data-0x00-email-info
+{
+    margin-top: 350px;
+}
+
+#QNJ-data-0x00-email-id
+{
+    margin-top: 380px;
+}
+
+#QNJ-data-0x00-phonenumber-info
+{
+    margin-top: 425px;
+}
+
+#QNJ-data-0x00-phonenumber-id
+{
+    margin-top: 455px;
+}
+
+#QNJ-data-0x00-country-info
+{
+    margin-top: 500px;
+}
+
+#QNJ-data-0x00-country-id
+{
+    margin-top: 530px;
+}
+
+#QNJ-data-0x00-city-info
+{
+    margin-top: 575px;
+}
+
+#QNJ-data-0x00-city-id
+{
+    margin-top: 605px;
+}
+
+#QNJ-data-0x00-title-add-family-paty
+{
+    position: absolute;
+    left: 50%;
+    top: 655px;
+    color: rgb(132, 0, 255);
+    font-weight: 600;
+    font-size: 22px;
+    transform: translate(-50%, -0%);
+}
+
+#QNJ-data-0x00-martialstat-info
+{
+    margin-top: 695px;
+}
+
+#QNJ-data-0x00-martialstat-id
+{
+    margin-top: 725px;
+}
+
+#QNJ-data-0x00-children-info
+{
+    margin-top: 770px;
+}
+
+#QNJ-data-0x00-children-id
+{
+    margin-top: 805px;
+}
+
+#QNJ-data-0x00-misc-info-sp
+{
+    position: absolute;
+    left: 50%;
+    top: 855px;
+    color: rgb(132, 0, 255);
+    font-weight: 600;
+    font-size: 22px;
+    transform: translate(-50%, -0%);
+}
+
+#QNJ-data-0x00-userpic-info
+{
+    margin-top: 895px;
+}
+
+#QNJ-data-0x00-userpic-id
+{
+    margin-top: 925px;
+}
+
+#user-data-0x00-client-div
+{
+    position: absolute;
+    top: 25%;
+    left: 2.5%;
+    width: 95%;
+    height: 789px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 70px;
+}
+
+.data-0x00-user-preview
+{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    cursor: pointer;
+}
+
+.user-summary
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: solid 2px rgb(103, 63, 255);
+    border-radius: 8px;
+}
+
+.user-image
+{
+    position: relative;
+    left: 5%;
+    top: 5%;
+    width: 155px;
+    height: 155px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: solid 2px rgb(103, 63, 255);
+}
+
+.user-summary h2
+{
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    color: rgb(255, 255, 255);
+    font-weight: 800;
+}
+
+.user-summary p
+{
+    display: flex;
+    margin: 17px;
+    max-width: 250px;
+    overflow: hidden;
+    color: rgb(255, 255, 255);
+    font-weight: 800;
+}
+
+.user-summary p
+{
+    font-weight: 600;
+}
+
+#user-data-0x00-client-div-full
+{
+    width: 500px;
+    height: 600px;
+    overflow-y: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30000;
+    border-radius: 8px;
+    background-color: #000;
+}
+
+.user-details-full
+{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+}
+
+.user-details p, h2, h3
+{
+    color: rgb(132, 0, 255);
+    display: flex;
+    justify-content: center;
+}
+
+.user-details h2, h3
+{
+    font-weight: 800;
+}
