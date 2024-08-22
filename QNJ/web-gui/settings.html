@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/main.css">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/dashboard_index.css">
+    <title>QNJ-Cloud | Settings</title>
+</head>
+<body>
+    <div class="DOOMSDAY-SWITCH-overlay" id="DOOMSDAY-SWITCH-overlay-ID"></div>
+    <div class="QNJ-TOP-BAR">
+        <div class="QNJ-CLOUD-ICON-A">
+            <a href="/">
+                <img src="/QNJ-Cloud/assets/png/home-white.png" id="QNJ-CLOUD-ICON-A-LINK">
+            </a>
+        </div>
+        <div class="QNJ-TOP-BAR-A-BUTTONS-LOC">
+            <a href="/dashboard" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/control-panel.svg">
+                <h3>Control-Panel</h3>
+            </a>
+            <a href="/dashboard/payloads" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/payload.svg">
+                <h3>Payloads</h3>
+            </a>
+            <a href="/dashboard/connections" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/connections.svg">
+                <h3>Connections</h3>
+            </a>
+            <a href="/dashboard/data-0x00" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/data-0x00.svg">
+                <h3>Data-0x00</h3>
+            </a>
+            <a href="/dashboard/statics" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/admin-panel.svg">
+                <h3>Statics</h3>
+            </a>
+        </div>
+        <div class="QNJ-USER-DATA-AREA">
+            <div class="QNJ-USER-DATA-CONTAINER">
+                <button type="submit" style="background-color: rgb(0, 0, 0, 0); cursor: pointer;" id="QNJ-DISPLAY-CLIENT-DATA" onclick="Display_Client_Data_Bar()">
+                    <img src="/QNJ-Cloud/assets/svg/user.svg">
+                    <img src="/QNJ-Cloud/assets/svg/expand.svg">
+                </button>
+            </div>
+        </div>
+        <div class="QNJ-USER-DATA-BAR-INFO" id="QNJ-CLIENT-DATA-BAR-DISPLAY">
+            <ul id="QNJ-USER-PROFILE-BUTTONS">
+                <li id="QNJ-PROFILE-BUTTONS">
+                    <a href="/dashboard/profile">
+                        <button type="submit" id="QNJ-BUTTON-DATA-CLIENT">
+                            <h3>My Profile</h3>
+                        </button>
+                    </a>
+                </li>
+                <li id="QNJ-PROFILE-BUTTONS"> <!--                                    -->
+                    <button type="submit" id="QNJ-DOOMSDAY-SWITCH-CLASS" onclick="Display_DoomsDay_BAr()">
+                        <h3>Doomsday Switch</h3>
+                    </button>
+                </li>
+                <li id="QNJ-PROFILE-BUTTONS" class="QNJ-SETTINGS-PROFILE">
+                    <a href="/dashboard/settings">
+                        <button type="submit">
+                            <h3>Settings</h3>
+                        </button>
+                    </a>
+                </li>
+                <li id="QNJ-PROFILE-BUTTONS">
+                    <form action="/logout_user" method="post">
+                        <button type="submit">
+                            <h3>Logout</h3>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <main class="QNJ-MAIN-DATA-AREA">
+        <div class="QNJ-CENTER-DATA">
+            <div class="QNJ-H3-INFO-LOCATION">
+                <h3>Settings</h3>
+            </div>
+        </div>
+        <div class="QNJ-DOOMSDAY-SWITCH-DIV" id="QNJ-DOOMSDAY-ID-SWITCH">
+            <div class="QNJ-DOOMSDAY-SWITCH-CONTAINER">
+                <span id="QNJ-DOOMSDAY-SWITCH-SPAN-INFO-T">
+                    Critical Alert: Activating the Doomsday Switch will immediately shut down both the HTTP and TCP servers. 
+                    Proceeding is irreversible. To cancel, press close. For emergency use only
+                </span>
+                <form action="/dashboard/api/QNJ-0x00-NULL-SERVER" method="post">
+                    <button type="submit" id="QNJ-DOOMSDAY-SWITCH-CONTINUE-B">
+                        <h3>Continue</h3>
+                    </button>
+                </form>
+                <button type="submit" onclick="QNJ_CLOSE_DOOMS_DAY_SWITCH()" id="QNJ-DOOMSDAY-SWITCH-CLOSE-B">
+                    <h3>Close</h3>
+                </button>
+            </div>
+        </div>
+
+        <!-- HERE COMES THE MAIN CONTENT -->
+    </main>
+    <script src="/QNJ-Cloud/js/web-tracker.js"></script>
+</body>
+</html>

