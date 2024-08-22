@@ -257,3 +257,13 @@
     font-family:'Courier New', Courier, monospace;
     color: rgb(255, 255, 255);
 }
+
+#QNJ-page-views
+{
+    position: absolute;
+    top: 26.25%;
+    left: 22%;
+    color: rgb(132, 0, 220);
+    font-weight: 600;
+    font-size: 18px;
+}

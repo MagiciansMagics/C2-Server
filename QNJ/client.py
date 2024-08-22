@@ -4,7 +4,7 @@ import requests
 import os
 
 ip = "127.0.0.1"
-port = 40000
+port = 30000
 address = (ip, port)
 
 # Get the public IP address and strip any trailing whitespace (including newlines)

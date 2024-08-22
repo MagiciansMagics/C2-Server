@@ -2,31 +2,19 @@
 #define TCP_HANDLE_CLIENT_HPP
 #include "../qnj_config.h"
 #include "../json/save_tcp_database_json.hpp"
+#include "../json/save_tcp_client_connections.hpp"
 #include "./smart_handle_clients.hpp"
+#include "./TCP_handle_client.h"
 
-#define MAX_BUFFER 2048
-
-int CLIENT_TOTAL_AMOUNT = 0, CLIENT_OFFLINE_AMOUNT = 0, CLIENT_ONLINE_AMOUNT = 0;
-int TCP_CLIENT_SOCKET;
-char buffer[MAX_BUFFER] = {0};
-ssize_t bytes_received;
-int client_int_num = 0;
-std::vector<std::string> client_id_array;
-std::vector<int> client_number_id;
-int client_num_am_id = 0;
-std::string returned_client_data_string;
-std::map<std::string, std::string> client_status_map;
-std::string returned_client_vector_data;
-std::mutex client_mutex;
-
-std::string extract_client_vector_data()
+void extract_client_vector_data()
 {
     std::string result;
     for (const std::string& magic : client_id_array)
     {
         result += magic + "<br>";
     }
-    return result;
+
+    save_client_connection_tcp(result);
 }
 
 void set_socket_nonblocking(int socket_fd) {
@@ -62,7 +50,6 @@ void update_client_int_number() {
 void handle_client(int client_socket, std::string client_addr_save) {
     char buffer[MAX_BUFFER] = {0};
     ssize_t bytes_received;
-    std::string client_string_data_full; // Make client_string_data_full local to this function
 
     set_socket_nonblocking(client_socket);
 
@@ -85,7 +72,7 @@ void handle_client(int client_socket, std::string client_addr_save) {
             client_status_map[client_addr_save] = "offline";
             client_mutex.unlock();
             update_client_id_array(client_addr_save, false, client_string_data_full);
-            returned_client_data_string = extract_client_vector_data();
+            extract_client_vector_data();
             break;
         } 
         else if (bytes_received == 0) 
@@ -97,15 +84,15 @@ void handle_client(int client_socket, std::string client_addr_save) {
             client_status_map[client_addr_save] = "offline";
             client_mutex.unlock();
             update_client_id_array(client_addr_save, false, client_string_data_full);
-            returned_client_data_string = extract_client_vector_data();
+            extract_client_vector_data();
             close(client_socket);
             break;
         }
 
         // Process the data and update client_string_data_full
-        client_string_data_full = return_client_data(buffer, bytes_received);
-        returned_client_data_string = extract_client_vector_data();
+        client_string_data_full += return_client_data(buffer, bytes_received);
         update_client_id_array(client_addr_save, true, client_string_data_full);
+        extract_client_vector_data();
     }
 }
 
@@ -125,8 +112,6 @@ void QNJ_TCP_HANDLE_CLIENTS(int QNJ_TCP_Main_server_socket) {
         int client_port = ntohs(TCP_client_address.sin_port);
         std::string client_addr_save = client_address + ":" + std::to_string(client_port);
 
-        std::cout << client_addr_save << "\n";
-
         client_mutex.lock();
         CLIENT_TOTAL_AMOUNT += 1;
         CLIENT_ONLINE_AMOUNT = CLIENT_TOTAL_AMOUNT - CLIENT_OFFLINE_AMOUNT;
@@ -142,4 +127,5 @@ void QNJ_TCP_HANDLE_CLIENTS(int QNJ_TCP_Main_server_socket) {
         client_thread.detach();
     }
 }
+
 #endif

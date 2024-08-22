@@ -1,4 +1,5 @@
 #include "../qnj_config.h"
+#include "./html_page.h"
 
 void send_html_page(const std::string& html_content, const std::string& http_code, const std::string& http_ver, int client_socket)
 {
@@ -10,4 +11,5 @@ void send_html_page(const std::string& html_content, const std::string& http_cod
     send(client_socket, response_header.c_str(), response_header.length(), 0);
 
     send(client_socket, html_content.c_str(), html_content.length(), 0);
+    page_views += 1;
 }

@@ -4,6 +4,7 @@
 #include "../qnj_config.h"
 #include "./http/HTTP_STATUS.hpp"
 #include "../json/save_2http_requests.hpp"
+#include "./html_page.h"
 
 void content_send_file_w_client_side(const std::string& file_path, const std::string& content_type, const std::string& http_code, const std::string& http_ver, int client_socket, std::string& custom_content)
 {
@@ -34,6 +35,8 @@ void content_send_file_w_client_side(const std::string& file_path, const std::st
 
     // Sending the HTML content
     send(client_socket, html_content.c_str(), html_content.length(), 0);
+
+    page_views += 1;
 
     // Close the file
     file.close();

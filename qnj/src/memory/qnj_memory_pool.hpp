@@ -87,11 +87,9 @@ void qnj_reset_pool(qnj_pool_t *pool)
 void* qnj_palloc(qnj_pool_t *pool, std::size_t size)
 {
     if (size <= pool->max) {
-        std::cout << "Allocating small pool amount" << std::endl;
         return qnj_palloc_small(pool, size, 1);
     }
 
-    std::cout << "Allocating large pool amount" << std::endl;
     return qnj_palloc_large(pool, size);
 }
 

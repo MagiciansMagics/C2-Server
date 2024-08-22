@@ -6,6 +6,7 @@
 #include "../json/save_2http_requests.hpp"
 #include "../memory/qnj_memory_pool.h"
 #include "../memory/qnj_alloc.hpp"
+#include "./html_page.h"
 
 constexpr char SERVER_NAME[] = "QNJ-Cloud";
 constexpr char POWERED_BY[] = "magic";
@@ -67,6 +68,7 @@ void send_html_file(const std::string& file_path, const std::string& content_typ
 
     // Send the file content
     send_with_error_handling(client_socket, html_content, content_length);
+    page_views += 1;
 
     // Deallocate memory (either from pool or standard allocation)
     qnj_free(html_content);

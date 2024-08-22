@@ -20,6 +20,8 @@
 #include <map>                  
 #include <algorithm>
 #include <sys/vfs.h>            
+#include <thread>
+#include <fstream>
 
 #include <sys/uio.h>
 #include <sys/stat.h>
@@ -36,6 +38,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/un.h>
+#include <sys/epoll.h>
 
 #include <ctime>                /* C++ equivalent of <time.h> */
 #include <malloc.h>             /* memalign() */

@@ -15,7 +15,7 @@
 #include "../json/save_user_remote_addr.hpp"
 #include "../json/save_http_requests.hpp"
 
-#define CLIENT_REQUEST_BUFFER 2048
+#define CLIENT_REQUEST_BUFFER 8192
 
 std::string getHeader(const std::string& headerName, const std::string& requestHeaders) {
     std::string headerValue;
@@ -31,12 +31,13 @@ void handleClient(int client_socket, struct sockaddr_in client_address) {
     size_t client_request_size = 8192;
 
     qnj_pool_t* pool = qnj_create_pool(client_request_size);
-    char* buffer = static_cast<char*>(qnj_palloc(pool, 2048));
+    char* buffer = static_cast<char*>(qnj_palloc(pool, 8192));
 
     if (!buffer)
     {
         std::cout << "Allocating for buffer failed" << std::endl;
         qnj_destroy_pool(pool);
+        close(client_socket);
         return;
     }
     
@@ -63,6 +64,7 @@ void handleClient(int client_socket, struct sockaddr_in client_address) {
         {
             std::string method = requestHeaders.substr(0, method_pos);
             std::transform(method.begin(), method.end(), method.begin(), ::toupper);
+            std::string userAgent = getHeader("User-Agent", requestHeaders);
             if (method == "GET" || method == "POST")
             {
                 size_t http_version_start = requestHeaders.find("HTTP/") + 5; // Find the start position of HTTP version
@@ -105,48 +107,66 @@ void handleClient(int client_socket, struct sockaddr_in client_address) {
 }
 
 void CLIENTM_main_server_hpp(int QNJ_Main_server_socket) {
-    fd_set master_set, working_set;
-    FD_ZERO(&master_set);
-    FD_SET(QNJ_Main_server_socket, &master_set);
-    int max_sd = QNJ_Main_server_socket;
+    int epoll_fd = epoll_create1(0);
+    if (epoll_fd == -1) {
+        std::cerr << "[ERROR] Failed to create epoll instance" << std::endl;
+        return;
+    }
+
+    struct epoll_event event;
+    event.events = EPOLLIN;
+    event.data.fd = QNJ_Main_server_socket;
+
+    if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, QNJ_Main_server_socket, &event) == -1) {
+        std::cerr << "[ERROR] Failed to add server socket to epoll" << std::endl;
+        close(epoll_fd);
+        return;
+    }
 
     std::map<int, sockaddr_in> client_addresses;
 
     while (true) {
-        qnj_memcpy(&working_set, &master_set, sizeof(master_set));
-
-        int activity = select(max_sd + 1, &working_set, nullptr, nullptr, nullptr);
-        if (activity < 0 && errno != EINTR) {
-            std::cerr << "[ERROR] Select error" << std::endl;
+        struct epoll_event events[10];
+        int event_count = epoll_wait(epoll_fd, events, 10, -1);
+        if (event_count < 0) {
+            std::cerr << "[ERROR] epoll_wait error" << std::endl;
             break;
         }
 
-        for (int i = 0; i <= max_sd; ++i) {
-            if (FD_ISSET(i, &working_set)) {
-                if (i == QNJ_Main_server_socket) {
-                    struct sockaddr_in client_address;
-                    socklen_t client_address_size = sizeof(client_address);
-                    int client_socket = accept(QNJ_Main_server_socket, (struct sockaddr*)&client_address, &client_address_size);
-                    if (client_socket < 0) {
-                        std::cerr << "[ERROR] Failed to accept client connection" << std::endl;
-                        continue;
-                    }
-
-                    FD_SET(client_socket, &master_set);
-                    if (client_socket > max_sd) max_sd = client_socket;
-
-                    client_addresses[client_socket] = client_address;
-                } 
-                else 
-                {
-                    handleClient(i, client_addresses[i]);
-                    FD_CLR(i, &master_set);
-                    close(i);
-                    client_addresses.erase(i);
-                }
+        for (int i = 0; i < event_count; ++i) {
+            if (events[i].data.fd == QNJ_Main_server_socket) {
+                addNewClient(QNJ_Main_server_socket, epoll_fd, client_addresses);
+            } else {
+                handleClient(events[i].data.fd, client_addresses[events[i].data.fd]);
+                close(events[i].data.fd);
+                epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, nullptr);
+                client_addresses.erase(events[i].data.fd);
             }
         }
     }
+
+    close(epoll_fd);
+}
+
+void addNewClient(int server_socket, int epoll_fd, std::map<int, sockaddr_in>& client_addresses) {
+    struct sockaddr_in client_address;
+    socklen_t client_address_size = sizeof(client_address);
+    int client_socket = accept(server_socket, (struct sockaddr*)&client_address, &client_address_size);
+    if (client_socket < 0) {
+        std::cerr << "[ERROR] Failed to accept client connection" << std::endl;
+        return;
+    }
+
+    struct epoll_event event;
+    event.events = EPOLLIN;
+    event.data.fd = client_socket;
+    if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client_socket, &event) == -1) {
+        std::cerr << "[ERROR] Failed to add client socket to epoll" << std::endl;
+        close(client_socket);
+        return;
+    }
+
+    client_addresses[client_socket] = client_address;
 }
 
 #endif

