@@ -1,3 +1,5 @@
+#ifndef _QNJ_CONFIG_H_
+#define _QNJ_CONFIG_H_
 #include <sys/types.h>
 #include <sys/time.h>
 #include <iostream>
@@ -11,6 +13,9 @@
 #include <cctype>               /* C++ equivalent of <ctype.h> */
 #include <cerrno>               /* C++ equivalent of <errno.h> */
 #include <string.h>             /* <string.h> is needed for strerror, keep if using strerror */
+#include <random>
+#include <sstream>
+#include <string_view>
 #include <signal.h>
 #include <pwd.h>
 #include <grp.h>
@@ -50,3 +55,14 @@
 #include <dlfcn.h>
 
 #define pass (void)0
+
+std::string payload_config_path = "/root/qnj-server/payloads.cfg";
+std::string payload_file_path = "/root/qnj-server/client_cmds/";
+
+std::string data_0x00_client_path = "/root/qnj-server/user_client_data-0x00.json";
+
+std::string screen_shot_save_path = "/home/magician/Desktop/QNJ/QNJ-Cloud/assets/ssusers/";
+std::string full_path_extra_path = "/home/magician/Desktop/QNJ";
+std::string qnj_screen_shot_path = "/QNJ-Cloud/assets/ssusers/";
+
+#endif

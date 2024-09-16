@@ -2,11 +2,12 @@
 #define TCP_HANDLE_CLIENT_HPP
 #include "../qnj_config.h"
 #include "../json/save_tcp_database_json.hpp"
-#include "../json/save_tcp_client_connections.hpp"
 #include "./smart_handle_clients.hpp"
 #include "./TCP_handle_client.h"
+#include "../networking/utils/generate_random_string.hpp"
+#include "../networking/utils/check_if_file_is_png.hpp"
 
-void extract_client_vector_data()
+std::string extract_client_vector_data()
 {
     std::string result;
     for (const std::string& magic : client_id_array)
@@ -14,7 +15,7 @@ void extract_client_vector_data()
         result += magic + "<br>";
     }
 
-    save_client_connection_tcp(result);
+    return result;
 }
 
 void set_socket_nonblocking(int socket_fd) {
@@ -50,11 +51,20 @@ void update_client_int_number() {
 void handle_client(int client_socket, std::string client_addr_save) {
     char buffer[MAX_BUFFER] = {0};
     ssize_t bytes_received;
+    std::string random_created_string;
+    random_created_string.clear();
+    random_created_string = generate_random_string(5);
+    file_path = screen_shot_save_path + "received_file_" + random_created_string + ".png";
+    paths_file_path_ssuser = qnj_screen_shot_path + "received_file_" + random_created_string + ".png";
+    bool is_binary = false;
 
     set_socket_nonblocking(client_socket);
 
     client_string_data_full = ""; // Initialize client_string_data_full when client connects
     update_client_id_array(client_addr_save, true, client_string_data_full);
+
+    std::ofstream file_output;  // For saving binary data
+    bool file_opened = false;   // Track whether the file has been opened
 
     while (true) {
         bytes_received = recv(client_socket, buffer, MAX_BUFFER, 0);
@@ -85,14 +95,42 @@ void handle_client(int client_socket, std::string client_addr_save) {
             client_mutex.unlock();
             update_client_id_array(client_addr_save, false, client_string_data_full);
             extract_client_vector_data();
+            if (file_opened) {
+                file_output.close();
+            }
             close(client_socket);
             break;
         }
 
-        // Process the data and update client_string_data_full
-        client_string_data_full += return_client_data(buffer, bytes_received);
-        update_client_id_array(client_addr_save, true, client_string_data_full);
-        extract_client_vector_data();
+        // Detect binary data (e.g., based on content inspection or headers)
+        if (!is_binary) {
+            is_binary = check_if_binary(buffer, bytes_received);
+        }
+
+        if (is_binary) {
+            // Always reopen file in overwrite mode for each transmission
+            if (!file_opened) {
+                file_output.open(file_path, std::ios::binary | std::ios::trunc);
+                file_opened = true;
+            }
+            file_output.write(buffer, bytes_received);
+            file_output.flush();  // Ensure data is written immediately
+
+            // Close the file when done with the transmission
+            if (bytes_received < MAX_BUFFER) {
+                file_output.close();
+                file_opened = false;  // Ready for next transmission
+            }
+        } 
+        else {
+            client_string_data_full += return_client_data(buffer, bytes_received);
+            update_client_id_array(client_addr_save, true, client_string_data_full);
+            extract_client_vector_data();
+        }
+    }
+
+    if (file_opened) {
+        file_output.close();
     }
 }
 
@@ -112,6 +150,10 @@ void QNJ_TCP_HANDLE_CLIENTS(int QNJ_TCP_Main_server_socket) {
         int client_port = ntohs(TCP_client_address.sin_port);
         std::string client_addr_save = client_address + ":" + std::to_string(client_port);
 
+        QNJ_TCP_CLIENT_SOCKET.push_back(TCP_CLIENT_SOCKET);
+
+        std::cout << "New client addres: " << client_addr_save << std::endl;
+
         client_mutex.lock();
         CLIENT_TOTAL_AMOUNT += 1;
         CLIENT_ONLINE_AMOUNT = CLIENT_TOTAL_AMOUNT - CLIENT_OFFLINE_AMOUNT;
@@ -123,7 +165,7 @@ void QNJ_TCP_HANDLE_CLIENTS(int QNJ_TCP_Main_server_socket) {
 
         update_client_id_array(client_addr_save, true, "");
         update_client_int_number();
-        std::thread client_thread(handle_client, TCP_CLIENT_SOCKET, client_addr_save);
+        std::thread client_thread([&]() { handle_client(TCP_CLIENT_SOCKET, client_addr_save); });
         client_thread.detach();
     }
 }

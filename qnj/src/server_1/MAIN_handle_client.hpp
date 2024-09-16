@@ -58,7 +58,7 @@ void handleClient(int client_socket, struct sockaddr_in client_address) {
     }
     else
     {
-        std::string requestHeaders(buffer);
+        std::string requestHeaders(buffer, bytes_received);
         size_t method_pos = requestHeaders.find(" ");
         if (method_pos != std::string::npos)
         {

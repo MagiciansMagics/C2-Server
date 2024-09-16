@@ -28,6 +28,7 @@ void tcp_listen(const std::string& address, const int port)
     QNJ_TCP_HANDLE_CLIENTS(QNJ_TCP_Main_server_socket);
 }
 
+/*
 void spawn_worker(void(*server_func)(const std::string&, const int), const std::string& ip, const int port) {
     pid_t pid = fork();
     if (pid < 0) {
@@ -59,20 +60,22 @@ void monitor_workers() {
     }
 }
 
+*/
+
 void start_both_servers(const std::string& http_ip, const int http_port, const std::string& tcp_ip, const int tcp_port)
 {
+    std::thread start_http_server([&]() { listen(http_ip, http_port); });
+    sleep(0.7);
+    std::thread start_tcp_server([&]() { tcp_listen(tcp_ip, tcp_port); });
+    sleep(0.7);
     std::thread load_json_config_files([&]() { load_json_configs(); });
     sleep(0.7);
 
-    // Start the worker processes
-    spawn_worker(listen, http_ip, http_port);
-    sleep(1);
-    spawn_worker(tcp_listen, tcp_ip, tcp_port);
-
+    start_http_server.join();
+    start_tcp_server.join();
     load_json_config_files.join();
 
     // Monitor the worker processes
-    monitor_workers();
 }
 
 #endif
