@@ -102,3 +102,76 @@
 {
     background-color: rgb(132, 0, 255);
 }
+
+.QNJ-SCREEN-SHARE-CLIENT
+{
+    position: absolute;
+    left: 30%;
+    margin-top: 120px;
+    width: 1300px;
+    height: 641.5px;
+    border: solid 2px rgb(119, 0, 230);
+    border-radius: 8px;
+}
+
+#QNJ-SCREEN-SHARE-CLIENT-MAIN-ID
+{
+    position: absolute;
+    top: 199px;
+    left: 30.1%;
+    height: 525px;
+    width: 1300px;
+}
+
+#QNJ-SCREEN-SHARE-CLIENT-MAIN-ID img
+{
+    height: 525px;
+    width: 1000px;
+}
+
+.QNJ-SCREEN-SHARE-CLIENT-TASKBAR
+{
+    position: absolute;
+    top: 527px;
+    width: 1300px;
+    height: 114px;
+    border-top: solid 2px rgb(119, 0, 230);
+}
+
+#QNJ-TERMINAL-INPUT-ID
+{
+    position: absolute;
+    background-color: rgb(0, 0, 0, 0);
+    border: solid 2px rgb(119, 0, 230);
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 400px;
+    height: 35px;
+    border-radius: 6px;
+    text-overflow: clip;
+    font-size: 16px;
+    line-height: 5px;
+    font-family: Inconsolata, monospace;
+}
+
+#QNJ-PAYLOAD-CLIENT-ID
+{
+    position: absolute;
+    background-color: rgb(0, 0, 0, 0);
+    border: solid 2px rgb(119, 0, 230);
+    color: #fff;
+    margin-top: 62.5px;
+    margin-left: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 400px;
+    height: 35px;
+    border-radius: 6px;
+    text-overflow: clip;
+    font-size: 16px;
+    line-height: 5px;
+    font-family: Inconsolata, monospace;
+}

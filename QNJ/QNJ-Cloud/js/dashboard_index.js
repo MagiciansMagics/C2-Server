@@ -1,5 +1,6 @@
 const total_clients_span_id = document.getElementById("QNJ_TCP_CLIENT_AMOUNT");
-
+const qnj_screen_share_id = document.getElementById("QNJ-SCREEN-SHARE-CLIENT-ID");
+const qnj_screen_share_id_main = document.getElementById("QNJ-SCREEN-SHARE-CLIENT-MAIN-ID");
 function QNJ_REPEAT_GET_REQUEST_AM()
 {
   fetch("/dashboard/api/QNJ-Jg94japEjgnammykglA316-geadgE69")
@@ -8,7 +9,6 @@ function QNJ_REPEAT_GET_REQUEST_AM()
     requests_text.innerText = data["requests"];
   })
 }
-
 fetch("/dashboard/api/QNJ-Megj4aj3194g2-h5mantt4N-!33gc31E69")
   .then(response => response.json())
   .then(data => {

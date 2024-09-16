@@ -127,6 +127,19 @@
                 </form>
             </div>
         </div>
+
+
+        <div class="QNJ-SCREEN-SHARE-CLIENT" id="QNJ-SCREEN-SHARE-CLIENT-ID">
+
+            <div class="QNJ-SCREEN-SHARE-CLIENT-TASKBAR">
+                <form action="/dashboard/api/send_payload_ss_reload" method="post">
+                    <input name="QNJ-PAYLOAD-CMD" placeholder="Enter a command..." id="QNJ-TERMINAL-INPUT-ID" required>
+                    <input name="QNJ-PAYLOAD-CMD-CLIENT-ID" placeholder="Enter client id..." id="QNJ-PAYLOAD-CLIENT-ID" required>
+                    <input name="QNJ-SKIP-DATA" style="display: none;">
+                    <button type="submit" id="" style="display: none;"></button>
+                </form>
+            </div>
+        </div>
     </main>
     <script src="/QNJ-Cloud/js/web-tracker.js"></script>
     <script src="/QNJ-Cloud/js/dashboard_index.js"></script>

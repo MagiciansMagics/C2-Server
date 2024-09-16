@@ -178,3 +178,13 @@
     background-color: rgb(0, 0, 0, 0);
     border: solid 2px rgb(132, 0, 255);
 }
+
+#QNJ-PAYLOAD-PORT-ID
+{
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    color: #fff;
+    background-color: rgb(0, 0, 0, 0);
+    border: solid 2px rgb(132, 0, 255);
+}
