@@ -98,6 +98,7 @@
     border-top: solid 0px;
     display: none;
     z-index: 100;
+    background-color: rgb(27, 27, 27);
 }
 
 #QNJ-PROFILE-BUTTONS

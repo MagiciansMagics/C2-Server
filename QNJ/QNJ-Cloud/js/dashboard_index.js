@@ -31,4 +31,4 @@ setInterval(updateTime, 1000);
 */
 
 QNJ_REPEAT_GET_REQUEST_AM();
-setInterval(QNJ_REPEAT_GET_REQUEST_AM, 30000)
+setInterval(QNJ_REPEAT_GET_REQUEST_AM, 5000)

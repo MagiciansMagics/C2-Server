@@ -6,9 +6,8 @@ const display_client_b = document.getElementById("QNJ-DISPLAY-CLIENT-DATA");
 const client_data_bar = document.getElementById("QNJ-CLIENT-DATA-BAR-DISPLAY");
 const doomsday_bar_main = document.getElementById("QNJ-DOOMSDAY-ID-SWITCH");
 const doomsday_bar_overlay = document.getElementById("DOOMSDAY-SWITCH-overlay-ID");
-const client_connection_data = document.getElementById("QNJ-CONNECTIONS-DATA-SP");
-const client_connection_container_div = document.getElementById("QNJ-CLIENT-DISPLAY-CONNECTION-BAR");
 var first_click = true
+
 
 user_data_display.appendChild(user_data_username);
 
@@ -38,4 +37,3 @@ function QNJ_CLOSE_DOOMS_DAY_SWITCH()
   doomsday_bar_overlay.style.display = "none";
 }
 
-client_connection_container_div.appendChild(client_connection_data);

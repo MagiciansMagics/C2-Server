@@ -8,80 +8,96 @@
     display: flex;
     background-color: #111111;
     border-radius: 10px;
-}
-
-.QNJ-CLIENT-ARE-DISPLAY-CONTAINER
-{
-    position: absolute;
-    height: 720px;
-    width: 1790px;
-    top: 72px;
-    left: 5px;
     border: solid 2px rgb(132, 0, 255);
 }
 
-#QNJ-CONNECTIONS-DATA-SP
-{
-    display: flex;
-    width: 1450px;
-    word-spacing: 120px;
-    height: 25px;
-    font-size: 18px;
-    margin-left: 10%;
-    margin-top: 15px;
-}
-
-.QNJ-TOP-BAR-CLIENT-INFO
+.QNJ-CLIENT-SEPRATED-DATA-CONTAINER
 {
     position: absolute;
-    height: 65px;
-    width: 1790px;
-    top: 5px;
-    left: 5px;
-    border: solid 2px rgb(132, 0, 255);
+    top: 0%;
+    left: 0%;
+    width: 1800px;
+    height: 800px;
     display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.QNJ-TOP-BAR-CLIENT-INFO span
+.QNJ-CLIENT-SEPARATE-SECTION
+{
+    position: relative;
+    width: 225px;
+    height: 800px;
+}
+
+.QNJ-CLIENT-TITLE-SECTION
+{
+    position: relative;
+    width: 225px;
+    height: 70px;
+    border-bottom: solid 2px rgb(132, 0, 255);
+}
+
+.QNJ-CLIENT-SPAN-TITLE
 {
     position: absolute;
-    width: 200px;
+    color: #fff;
+    font-size: 19px;
+    text-align: center;
+    font-weight: 600;
+    width: 225px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.QNJ-CLIENT-DATA-SECTION
+{
+    position: relative;
+    height: 730px;
+    width: 225px;
+}
+
+
+.component-0-0,
+.component-0-1,
+.component-0-2,
+.component-0-3,
+.component-0-4,
+.component-0-5,
+.component-0-6,
+.component-0-7,
+.component-0-8
+{
+    position: relative;
     display: flex;
-    font-size: 18px;
-    margin-top: 22.5px;
+    justify-content: center;
+    margin-top: 35px;
+    width: 225px;
+    height: 16px;
+    max-width: 225px;
+    max-height: 16.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
 }
 
-#QNJ-UNIQUE-ID-START
+.QNJ-DELETE-CLIENT-ID-CLASS
 {
-    margin-left: 175px;
-}
-
-#QNJ-UNIQUE-STAT-START
-{
-    margin-left: 312.5px;
-}
-
-#QNJ-UNIQUE-RMA-MID
-{
-    margin-left: 485px;
-}
-
-#QNJ-UNIQUE-IP-MID
-{
-    margin-left: 745px;
-}
-
-#QNJ-UNIQUE-OS-END
-{
-    margin-left: 972.5px;
-}
-
-#QNJ-UNIQUE-OSR-END
-{
-    margin-left: 1150px;
-}
-
-#QNJ-UNIQUE-ARC-END
-{
-    margin-left: 1390px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    margin-top: 35px;
+    width: 180px;
+    height: 16px;
+    max-width: 90px;
+    max-height: 16.5px;
+    border-radius: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    background-color: rgb(103, 0, 220);
+    cursor: pointer;
 }
