@@ -11,8 +11,6 @@
 #include "../networking/send_html_files.hpp"
 #include "../networking/utils/get_cookie_info.hpp"
 #include "../json/make_database_json.hpp"
-#include "../json/save_user_public_addr.hpp"
-#include "../json/save_user_remote_addr.hpp"
 #include "../json/save_http_requests.hpp"
 
 #define CLIENT_REQUEST_BUFFER 8192
@@ -70,7 +68,16 @@ void handleClient(int client_socket, struct sockaddr_in client_address) {
                 size_t http_version_start = requestHeaders.find("HTTP/") + 5; // Find the start position of HTTP version
                 size_t http_version_end = requestHeaders.find("\r\n", http_version_start); // Find the end position of HTTP version
                 std::string http_version = requestHeaders.substr(http_version_start, http_version_end - http_version_start);
-                std::string first_part_http_data = std::string(inet_ntoa(client_address.sin_addr)) + " - - " + execute_get_time() + "\"" + method + "";
+                std::string xForwardedFor = getHeader("X-Forwarded-For", requestHeaders);
+                std::string first_part_http_data;
+                if (!xForwardedFor.empty() || xForwardedFor != "")
+                {
+                    first_part_http_data = xForwardedFor + " - - " + execute_get_time() + "\"" + method + "";
+                }
+                else
+                {
+                    first_part_http_data = std::string(inet_ntoa(client_address.sin_addr)) + " - - " + execute_get_time() + "\"" + method + "";
+                }
 
                 size_t start_pos = requestHeaders.find(method) + method.length() + 1; // Move past method and one space
                 size_t end_pos = requestHeaders.find("HTTP") - 1;
@@ -83,13 +90,6 @@ void handleClient(int client_socket, struct sockaddr_in client_address) {
                 std::string time_variable = execute_get_time();
                 save_server_data_json(request_amount);
                 
-                std::string xForwardedFor = getHeader("X-Forwarded-For", requestHeaders);
-                std::string Remote_address = inet_ntoa(client_address.sin_addr);
-
-                save_user_address_remote(Remote_address);
-
-                save_user_address_public(xForwardedFor);
-
                 userIdCookieValue = get_cookie("session_id", requestHeaders);
                 data0x00UserIdCookieValue = get_cookie("session_data_0x00", requestHeaders);
 

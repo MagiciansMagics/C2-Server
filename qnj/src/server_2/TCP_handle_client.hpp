@@ -12,7 +12,7 @@ std::string extract_client_vector_data()
     std::string result;
     for (const std::string& magic : client_id_array)
     {
-        result += magic + "<br>";
+        result += "<span class='qnj-extrated-client-vec'>" + magic + "</span>";
     }
 
     return result;
@@ -151,7 +151,7 @@ void QNJ_TCP_HANDLE_CLIENTS(int QNJ_TCP_Main_server_socket) {
         std::string client_addr_save = client_address + ":" + std::to_string(client_port);
 
         QNJ_TCP_CLIENT_SOCKET.push_back(TCP_CLIENT_SOCKET);
-
+        
         std::cout << "New client addres: " << client_addr_save << std::endl;
 
         client_mutex.lock();
