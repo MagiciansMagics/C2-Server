@@ -9,7 +9,7 @@ from datetime import datetime
 import threading
 
 ip = "127.0.0.1"
-port = 50000
+port = 60000
 address = (ip, port)
 
 # Get the public IP address and strip any trailing whitespace (including newlines)
