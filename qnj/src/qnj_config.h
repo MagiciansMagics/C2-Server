@@ -15,6 +15,7 @@
 #include <string.h>             /* <string.h> is needed for strerror, keep if using strerror */
 #include <random>
 #include <sstream>
+#include <atomic>
 #include <string_view>
 #include <signal.h>
 #include <pwd.h>

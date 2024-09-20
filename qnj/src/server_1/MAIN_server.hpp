@@ -14,6 +14,15 @@ void set_socket_options(int socket_fd) {
         close(socket_fd);
         exit(EXIT_FAILURE);
     }
+
+    // Enable SO_REUSEPORT
+    if (setsockopt(socket_fd, SOL_SOCKET, SO_REUSEPORT, &reuseaddr, sizeof(reuseaddr)) < 0)
+    {
+        std::cerr << "[ERR_PROXY_SERVER_SETSOCKOPT] Failed to set SO_REUSEPORT" << std::endl;
+        perror("Setsockopt SO_REUSEPORT failed");
+        close(socket_fd);
+        exit(EXIT_FAILURE);
+    }
 }
 
 void set_nonblocking(int socket_fd) {
